@@ -1,4 +1,6 @@
+#include <QTimeEdit>
 #include <QtGui>
+
 
 #include "trackdelegate.h"
 
@@ -14,8 +16,9 @@ void TrackDelegate::paint(QPainter *painter,
 {
     if (index.column() == durationColumn) {
         int secs = index.model()->data(index, Qt::DisplayRole).toInt();
-        QString text = QString("%1:%2")
-                       .arg(secs / 60, 2, 10, QChar('0'))
+        QString text = QString("%1:%2:%3")
+                       .arg(secs / 3600, 2, 10, QChar('0'))
+                       .arg(secs%3600 / 60, 2, 10, QChar('0'))
                        .arg(secs % 60, 2, 10, QChar('0'));
 
         QStyleOptionViewItem myOption = option;
@@ -34,7 +37,8 @@ QWidget *TrackDelegate::createEditor(QWidget *parent,
 {
     if (index.column() == durationColumn) {
         QTimeEdit *timeEdit = new QTimeEdit(parent);
-        timeEdit->setDisplayFormat("mm:ss");
+        timeEdit->setWrapping(true);
+        timeEdit->setDisplayFormat("HH:mm:ss");
         connect(timeEdit, SIGNAL(editingFinished()),
                 this, SLOT(commitAndCloseEditor()));
         return timeEdit;
@@ -49,7 +53,7 @@ void TrackDelegate::setEditorData(QWidget *editor,
     if (index.column() == durationColumn) {
         int secs = index.model()->data(index, Qt::DisplayRole).toInt();
         QTimeEdit *timeEdit = qobject_cast<QTimeEdit *>(editor);
-        timeEdit->setTime(QTime(0, secs / 60, secs % 60));
+        timeEdit->setTime(QTime(secs/3600, (secs % 3600) / 60, secs % 60));
     } else {
         QItemDelegate::setEditorData(editor, index);
     }
@@ -62,7 +66,7 @@ void TrackDelegate::setModelData(QWidget *editor,
     if (index.column() == durationColumn) {
         QTimeEdit *timeEdit = qobject_cast<QTimeEdit *>(editor);
         QTime time = timeEdit->time();
-        int secs = (time.minute() * 60) + time.second();
+        int secs = (time.hour()*3600)+ (time.minute() * 60) + time.second();
         model->setData(index, secs);
     } else {
         QItemDelegate::setModelData(editor, model, index);

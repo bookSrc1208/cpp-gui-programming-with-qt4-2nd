@@ -1,5 +1,7 @@
+//#include <QtGui>
 #include <QtWidgets>
 #include <cmath>
+#include <QStyleOptionGraphicsItem>
 
 #include "cityblock.h"
 

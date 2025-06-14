@@ -1,4 +1,20 @@
-#include <QtGui>
+#include <QWidget>
+#include <QDialog>
+#include <QTreeWidget>
+#include <QStringList>
+#include <QHeaderView>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
+#include <QLabel>
+#include <QLineEdit>
+#include <QGridLayout>
+#include <QSettings>
+#include <QString>
+#include <QTreeWidgetItem>
+#include <QHeaderView>
+#include <QDebug>
+
+#define DEBUG qDebug()<<Q_FUNC_INFO<<__LINE__
 
 #include "settingsviewer.h"
 
@@ -12,8 +28,8 @@ SettingsViewer::SettingsViewer(QWidget *parent)
     treeWidget->setColumnCount(2);
     treeWidget->setHeaderLabels(
             QStringList() << tr("Key") << tr("Value"));
-    treeWidget->header()->setResizeMode(0, QHeaderView::Stretch);
-    treeWidget->header()->setResizeMode(1, QHeaderView::Stretch);
+    treeWidget->header()->setSectionResizeMode(0, QHeaderView::Stretch);
+    treeWidget->header()->setSectionResizeMode(1, QHeaderView::Stretch);
 
     buttonBox = new QDialogButtonBox(QDialogButtonBox::Open
                                      | QDialogButtonBox::Close);
@@ -75,6 +91,14 @@ void SettingsViewer::readSettings()
     treeWidget->clear();
     addChildSettings(settings, 0, "");
 
+    QTreeWidgetItem *parent = treeWidget->invisibleRootItem();
+    QTreeWidgetItem *item;
+    foreach (QString group, settings.childGroups()) {
+        item = new QTreeWidgetItem(parent);
+        item->setText(0, group);
+        addChildSettings(settings, item, group);
+    }
+
     treeWidget->sortByColumn(0);
     treeWidget->setFocus();
     setWindowTitle(tr("Settings Viewer - %1 by %2")
@@ -89,16 +113,17 @@ void SettingsViewer::addChildSettings(QSettings &settings,
     QTreeWidgetItem *item;
 
     settings.beginGroup(group);
-
+    DEBUG<<group;
     foreach (QString key, settings.childKeys()) {
         item = new QTreeWidgetItem(parent);
         item->setText(0, key);
         item->setText(1, settings.value(key).toString());
+        DEBUG<<key<<settings.value(key).toString();
     }
-    foreach (QString group, settings.childGroups()) {
-        item = new QTreeWidgetItem(parent);
-        item->setText(0, group);
-        addChildSettings(settings, item, group);
-    }
+//    foreach (QString group, settings.childGroups()) {
+//        item = new QTreeWidgetItem(parent);
+//        item->setText(0, group);
+//        addChildSettings(settings, item, group);
+//    }
     settings.endGroup();
 }

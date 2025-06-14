@@ -1,6 +1,7 @@
 #include <QtCore>
 #include <QtNetwork>
 #include <iostream>
+#include <QDebug>
 
 #include "ftpget.h"
 
@@ -40,7 +41,7 @@ bool FtpGet::getFile(const QUrl &url)
     }
 
     ftp.connectToHost(url.host(), url.port(21));
-    ftp.login();
+    ftp.login("name","pwd");
     ftp.get(url.path(), &file);
     ftp.close();
     return true;

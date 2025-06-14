@@ -1,5 +1,5 @@
 #include <QtGui>
-
+#include <QApplication>
 #include "projectlistwidget.h"
 
 ProjectListWidget::ProjectListWidget(QWidget *parent)

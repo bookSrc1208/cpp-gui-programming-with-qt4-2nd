@@ -1,13 +1,9 @@
-QT += widgets
-
-PRECOMPILED_HEADER = stable.h
-
+QT+= core gui widgets
 TEMPLATE      = app
 HEADERS       = annotation.h \
                 cityblock.h \
                 cityscape.h \
-                cityview.h \
-    stable.h
+                cityview.h
 SOURCES       = annotation.cpp \
                 cityblock.cpp \
                 cityscape.cpp \

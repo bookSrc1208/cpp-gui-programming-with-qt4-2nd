@@ -1,4 +1,22 @@
-#include <QtGui>
+#include <QMdiArea>
+#include <QMdiSubWindow>
+#include <QPixmap>
+#include <QTimer>
+#include <QApplication>
+#include <QString>
+#include <QCloseEvent>
+#include <QMessageBox>
+#include <QAction>
+#include <QIcon>
+#include <QKeySequence>
+#include <QActionGroup>
+#include <QAction>
+#include <QLabel>
+#include <QMenuBar>
+#include <QToolBar>
+#include <QStatusBar>
+#include <QDebug>
+
 
 #include "editor.h"
 #include "mainwindow.h"
@@ -12,6 +30,7 @@ MainWindow::MainWindow()
 
     createActions();
     createMenus();
+    //this->setContextMenuPolicy(Qt::NoContextMenu); //去掉工具栏的右键菜单
     createToolBars();
     createStatusBar();
 
@@ -39,6 +58,7 @@ void MainWindow::newFile()
     Editor *editor = new Editor;
     editor->newFile();
     addEditor(editor);
+    qDebug()<<contextMenuPolicy();
 }
 
 void MainWindow::openFile(const QString &fileName)

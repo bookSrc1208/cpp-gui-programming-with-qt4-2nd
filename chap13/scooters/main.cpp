@@ -1,4 +1,7 @@
 #include <QtGui>
+#include <QMessageBox>
+#include <QApplication>
+#include <QtGui>
 #include <QtSql>
 
 #include "scooterwindow.h"

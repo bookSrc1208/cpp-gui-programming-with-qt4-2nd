@@ -1,4 +1,10 @@
-#include <QtGui>
+#include <QTableWidget>
+#include <QTableWidgetItem>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
+#include <QTableWidgetItem>
+#include <QDialog>
+#include <QPushButton>
 
 #include "trackdelegate.h"
 #include "trackeditor.h"
@@ -38,7 +44,7 @@ TrackEditor::TrackEditor(QList<Track> *tracks, QWidget *parent)
     QPushButton *addTrackButton = buttonBox->addButton(tr("&Add Track"),
             QDialogButtonBox::ActionRole);
 
-    connect(addTrackButton, SIGNAL(clicked()), this, SLOT(addTrack()));
+    connect(addTrackButton, &QPushButton::clicked, this, &TrackEditor::addTrack);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 

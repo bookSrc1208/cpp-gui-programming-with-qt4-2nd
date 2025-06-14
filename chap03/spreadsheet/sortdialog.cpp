@@ -1,10 +1,10 @@
-ï»¿#include <QtWidgets>
-
+//#include <QtGui>
+#include <QtWidgets>
 #include "sortdialog.h"
-// è¿™ä¸ªå¯¹è¯æ¡†æ˜¯ç”¨ç•Œé¢è®¾è®¡å™¨ç”Ÿæˆçš„ï¼Œæ‰€ä»¥è¿˜å¾—äº§ç”Ÿç›¸åº”çš„ui_*.h
+// Õâ¸ö¶Ô»°¿òÊÇÓÃ½çÃæÉè¼ÆÆ÷Éú³ÉµÄ£¬ËùÒÔ»¹µÃ²úÉúÏàÓ¦µÄui_*.h
 // cpps-make ui_sortdialog.h : sortdialog.ui // uic sortdialog.ui -o ui_sortdialog.h
 
-// å¼•å…¥é™„å±çš„.h.moc.cpp
+// ÒıÈë¸½ÊôµÄ.h.moc.cpp
 // using nocheck sortdialog.h.moc.cpp
 // cpps-make sortdialog.h.moc.cpp : sortdialog.h // moc sortdialog.h -o sortdialog.h.moc.cpp
 

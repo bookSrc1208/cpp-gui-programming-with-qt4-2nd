@@ -1,3 +1,3 @@
 TEMPLATE      = app
-QT           += xml
+QT           += xml widgets
 SOURCES       = xmlstreamwriter.cpp

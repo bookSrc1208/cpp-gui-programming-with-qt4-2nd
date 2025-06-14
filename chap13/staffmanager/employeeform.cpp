@@ -1,13 +1,34 @@
-#include <QtGui>
+//#include <QtGui>
 #include <QtSql>
+#include <QWidget>
+#include <QDialog>
+#include <QLineEdit>
+#include <QLabel>
+#include <QComboBox>
+#include <QIntValidator>
+#include <QDateEdit>
+#include <QDate>
+#include <QPushButton>
+#include <QDialogButtonBox>
+#include <QSqlRelationalTableModel>
+#include <QSqlRelation>
+#include <Qt>
+#include <QSqlTableModel>
+#include <QDataWidgetMapper>
+#include <QSqlRelationalDelegate>
+#include <QSqlRecord>
+#include <QHBoxLayout>
+#include <QGridLayout>
+#include <QDebug>
+
 
 #include "employeeform.h"
+#define DEBUG  qDebug()<<Q_FUNC_INFO<<__LINE__
 
 EmployeeForm::EmployeeForm(int id, QWidget *parent)
     : QDialog(parent)
 {
     nameEdit = new QLineEdit;
-
     nameLabel = new QLabel(tr("Na&me:"));
     nameLabel->setBuddy(nameEdit);
 
@@ -71,7 +92,7 @@ EmployeeForm::EmployeeForm(int id, QWidget *parent)
     mapper->addMapping(extensionLineEdit, Employee_Extension);
     mapper->addMapping(emailEdit, Employee_Email);
     mapper->addMapping(startDateEdit, Employee_StartDate);
-
+DEBUG<<id;
     if (id != -1) {
         for (int row = 0; row < tableModel->rowCount(); ++row) {
             QSqlRecord record = tableModel->record(row);
@@ -139,9 +160,13 @@ void EmployeeForm::done(int result)
 void EmployeeForm::addEmployee()
 {
     int row = mapper->currentIndex();
+    int rowCount = tableModel->rowCount();
+
     mapper->submit();
     tableModel->insertRow(row);
     mapper->setCurrentIndex(row);
+
+    DEBUG <<row<<rowCount<< tableModel->rowCount();
 
     nameEdit->clear();
     extensionLineEdit->clear();
@@ -152,7 +177,10 @@ void EmployeeForm::addEmployee()
 void EmployeeForm::deleteEmployee()
 {
     int row = mapper->currentIndex();
+    int rowCount =  tableModel->rowCount();
     tableModel->removeRow(row);
     mapper->submit();
     mapper->setCurrentIndex(qMin(row, tableModel->rowCount() - 1));
+
+    DEBUG <<row<<rowCount<< tableModel->rowCount();
 }

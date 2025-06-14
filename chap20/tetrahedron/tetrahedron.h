@@ -2,8 +2,10 @@
 #define TETRAHEDRON_H
 
 #include <QGLWidget>
+//#include <QOpenGLWindow>
+#include <QOpenGLFunctions_1_1>
 
-class Tetrahedron : public QGLWidget
+class Tetrahedron : public QGLWidget,public QOpenGLFunctions_1_1
 {
     Q_OBJECT
 

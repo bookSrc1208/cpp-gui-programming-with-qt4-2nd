@@ -1,5 +1,6 @@
-//#include <QtGui>
-#include <QtWidgets>
+#include <QtGui>
+#include <QPushButton>
+#include <QHBoxLayout>
 
 #include "threaddialog.h"
 

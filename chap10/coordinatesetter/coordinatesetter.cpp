@@ -1,4 +1,9 @@
-#include <QtGui>
+#include <QListWidget>
+#include <QListWidgetItem>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
+#include <QTableWidget>
+#include <QPushButton>
 
 #include "coordinatesetter.h"
 
@@ -25,7 +30,7 @@ CoordinateSetter::CoordinateSetter(QList<QPointF> *coords,
     buttonBox->addButton(QDialogButtonBox::Ok);
     buttonBox->addButton(QDialogButtonBox::Cancel);
 
-    connect(addRowButton, SIGNAL(clicked()), this, SLOT(addRow()));
+    connect(addRowButton, &QPushButton::clicked, this, &CoordinateSetter::addRow);
     connect(buttonBox, SIGNAL(accepted()), this, SLOT(accept()));
     connect(buttonBox, SIGNAL(rejected()), this, SLOT(reject()));
 

@@ -2,7 +2,8 @@
 #define FTPGET_H
 
 #include <QFile>
-#include <QFtp> // 这个类已经被淘汰了
+#include <QObject>
+#include <QFtp>// 这个类已经被淘汰了
 
 class QUrl;
 

@@ -1,8 +1,11 @@
-#include <QtGui>
-#include <QtNetwork>
+
+#include <QPushButton>
+#include <QHostAddress>
 
 #include "tripplanner.h"
 
+#include <QDebug>
+#define DEBUG qDebug()<<Q_FUNC_INFO<<__LINE__
 TripPlanner::TripPlanner(QWidget *parent)
     : QDialog(parent)
 {
@@ -152,5 +155,5 @@ void TripPlanner::closeConnection()
     tcpSocket.close();
     searchButton->setEnabled(true);
     stopButton->setEnabled(false);
-    progressBar->hide();
+    //progressBar->hide();
 }

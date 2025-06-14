@@ -1,7 +1,14 @@
-#include <QtGui>
+//#include <QtGui>
+#include <QStringListModel>
+#include <QListView>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QVBoxLayout>
+#include <QModelIndex>
+#include <QDebug>
 
 #include "teamleadersdialog.h"
-
+#define DEBUG qDebug()<<Q_FUNC_INFO<<__LINE__
 TeamLeadersDialog::TeamLeadersDialog(const QStringList &leaders,
                                      QWidget *parent)
     : QDialog(parent)
@@ -10,6 +17,7 @@ TeamLeadersDialog::TeamLeadersDialog(const QStringList &leaders,
     model->setStringList(leaders);
 
     listView = new QListView;
+    listView->setSelectionMode(QAbstractItemView::ContiguousSelection);
     listView->setModel(model);
     listView->setEditTriggers(QAbstractItemView::AnyKeyPressed
                               | QAbstractItemView::DoubleClicked);
@@ -43,6 +51,7 @@ QStringList TeamLeadersDialog::leaders() const
 void TeamLeadersDialog::insert()
 {
     int row = listView->currentIndex().row();
+    DEBUG<<row;
     model->insertRows(row, 1);
 
     QModelIndex index = model->index(row);

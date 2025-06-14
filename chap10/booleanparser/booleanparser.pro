@@ -1,3 +1,5 @@
+
+QT += widgets core gui
 TEMPLATE      = app
 HEADERS       = booleanmodel.h \
                 booleanparser.h \

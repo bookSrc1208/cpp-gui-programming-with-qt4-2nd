@@ -1,4 +1,15 @@
-#include <QtGui>
+#include <QStringListModel>
+#include <QListView>
+#include <QDialogButtonBox>
+#include <QPushButton>
+#include <QGridLayout>
+#include <QModelIndex>
+#include <QSortFilterProxyModel>
+#include <QComboBox>
+#include <QLabel>
+#include <QRegExp>
+#include <QLineEdit>
+#include <QDebug>
 
 #include "colornamesdialog.h"
 

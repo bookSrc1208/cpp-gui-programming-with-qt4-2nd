@@ -1,5 +1,5 @@
 TEMPLATE      = app
-QT           += xml
+QT           += xml core gui widgets
 HEADERS       = xmlstreamreader.h
 SOURCES       = main.cpp \
                 xmlstreamreader.cpp

@@ -1,5 +1,8 @@
 #include <QtGui>
 #include <QtSql>
+#include <QMessageBox>
+#include <QProgressDialog>
+#include <QApplication>
 #include <cstdlib>
 
 #include "mainform.h"

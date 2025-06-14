@@ -1,7 +1,7 @@
 #include <QtCore>
-
+#include <QDebug>
 #include "currencymodel.h"
-
+#define DEBUG qDebug()<<Q_FUNC_INFO<<__LINE__
 CurrencyModel::CurrencyModel(QObject *parent)
     : QAbstractTableModel(parent)
 {
@@ -10,7 +10,10 @@ CurrencyModel::CurrencyModel(QObject *parent)
 void CurrencyModel::setCurrencyMap(const QMap<QString, double> &map)
 {
     currencyMap = map;
-    reset();
+    //reset();
+//    beginResetModel();
+//    this->resetInternalData();
+//    this->endResetModel();
 }
 
 int CurrencyModel::rowCount(const QModelIndex & /* parent */) const

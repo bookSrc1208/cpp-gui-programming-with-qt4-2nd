@@ -1,4 +1,19 @@
-#include <QtGui>
+#include <QDateEdit>
+#include <QWidget>
+#include <QDialog>
+#include <QDate>
+#include <QLabel>
+#include <QTime>
+#include <QSpinBox>
+#include <QDoubleSpinBox>
+#include <QTreeWidget>
+#include <QCheckBox>
+#include <QDialogButtonBox>
+#include <QGridLayout>
+#include <QTreeWidgetItem>
+#include <QHeaderView>
+#include <QPushButton>
+
 
 #include "bronzedialog.h"
 

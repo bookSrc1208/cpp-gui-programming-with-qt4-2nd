@@ -1,4 +1,5 @@
-#include <QtGui>
+#include <QTreeWidgetItem>
+#include <QDebug>
 #include <QtXml>
 #include <iostream>
 

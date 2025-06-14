@@ -1,3 +1,5 @@
+
+QT += widgets
 TEMPLATE      = app
 CONFIG       += exceptions
 HEADERS       = oventimer.h

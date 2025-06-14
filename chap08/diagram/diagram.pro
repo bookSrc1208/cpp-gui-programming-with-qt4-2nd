@@ -1,13 +1,10 @@
-QT += widgets
 
-PRECOMPILED_HEADER = stable.h
-
+QT+= core gui widgets
 TEMPLATE      = app
 HEADERS       = diagramwindow.h \
                 link.h \
                 node.h \
-                propertiesdialog.h \
-    stable.h
+                propertiesdialog.h
 SOURCES       = diagramwindow.cpp \
                 link.cpp \
                 main.cpp \

@@ -1,4 +1,5 @@
 #include <QtWidgets>
+#include <QColorDialog>
 
 #include "node.h"
 #include "propertiesdialog.h"

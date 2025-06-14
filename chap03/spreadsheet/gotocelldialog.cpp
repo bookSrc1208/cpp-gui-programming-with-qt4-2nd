@@ -1,10 +1,12 @@
-ï»¿#include <QtWidgets>
+//#include <QtGui>
+#include <QtWidgets>
+#include <QPushButton>
 
 #include "gotocelldialog.h"
-// è¿™ä¸ªå¯¹è¯æ¡†æ˜¯ç”¨ç•Œé¢è®¾è®¡å™¨ç”Ÿæˆçš„ï¼Œæ‰€ä»¥è¿˜å¾—äº§ç”Ÿç›¸åº”çš„ui_*.h
+// Õâ¸ö¶Ô»°¿òÊÇÓÃ½çÃæÉè¼ÆÆ÷Éú³ÉµÄ£¬ËùÒÔ»¹µÃ²úÉúÏàÓ¦µÄui_*.h
 // cpps-make ui_gotocelldialog.h : gotocelldialog.ui // uic gotocelldialog.ui -o ui_gotocelldialog.h
 
-// å¼•å…¥é™„å±çš„.h.moc.cpp
+// ÒıÈë¸½ÊôµÄ.h.moc.cpp
 // using nocheck gotocelldialog.h.moc.cpp
 // cpps-make gotocelldialog.h.moc.cpp : gotocelldialog.h // moc gotocelldialog.h -o gotocelldialog.h.moc.cpp
 

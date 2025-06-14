@@ -1,18 +1,27 @@
-ï»¿#include <QtWidgets>
-
+//#include <QtGui>
+#include <QMessageBox>
+#include <QFile>
+#include <QApplication>
+#include <QClipboard>
+#include <QFileDialog>
+#include <QStatusBar>
+#include <QMenuBar>
+#include <QToolBar>
+#include <QCloseEvent>
+#include <QSettings>
 #include "finddialog.h" // usingcpp
 #include "gotocelldialog.h" // usingcpp
-#include "mainwindow.h" // è¿™æ˜¯æœ¬.cppè‡ªå·±çš„.h
+#include "mainwindow.h" // ÕâÊÇ±¾.cpp×Ô¼ºµÄ.h
 #include "sortdialog.h" // usingcpp
 #include "spreadsheet.h" // usingcpp
 
 
-// å¼•å…¥é™„å±çš„.h.moc.cpp
+// ÒıÈë¸½ÊôµÄ.h.moc.cpp
 // using nocheck mainwindow.h.moc.cpp
 // cpps-make mainwindow.h.moc.cpp : mainwindow.h // moc mainwindow.h -o mainwindow.h.moc.cpp
 
 
-// åœ¨ä½¿ç”¨èµ„æºçš„.cppä¸­å¼•å…¥.qrc.rcc.cpp
+// ÔÚÊ¹ÓÃ×ÊÔ´µÄ.cppÖĞÒıÈë.qrc.rcc.cpp
 // using nocheck spreadsheet.qrc.rcc.cpp
 // cpps-make spreadsheet.qrc.rcc.cpp : spreadsheet.qrc // rcc spreadsheet.qrc -o spreadsheet.qrc.rcc.cpp
 

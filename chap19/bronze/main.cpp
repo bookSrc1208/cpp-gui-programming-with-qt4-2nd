@@ -1,4 +1,5 @@
-#include <QtGui>
+#include <QApplication>
+#include <QLayout>
 
 #include "bronzedialog.h"
 #include "bronzestyle.h"

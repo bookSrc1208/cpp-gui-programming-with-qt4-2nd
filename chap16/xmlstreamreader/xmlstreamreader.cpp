@@ -1,8 +1,10 @@
-#include <QtGui>
+#include <QTreeWidgetItem>
 #include <QtXml>
+#include <QDebug>
 #include <iostream>
 
 #include "xmlstreamreader.h"
+#define DEBUG             qDebug()<<Q_FUNC_INFO<<__LINE__
 
 XmlStreamReader::XmlStreamReader(QTreeWidget *tree)
 {
@@ -54,6 +56,7 @@ void XmlStreamReader::readBookindexElement()
     reader.readNext();
     while (!reader.atEnd()) {
         if (reader.isEndElement()) {
+            DEBUG<<"End"<<reader.name();
             reader.readNext();
             break;
         }
@@ -78,11 +81,13 @@ void XmlStreamReader::readEntryElement(QTreeWidgetItem *parent)
     reader.readNext();
     while (!reader.atEnd()) {
         if (reader.isEndElement()) {
+            DEBUG<<"End"<<reader.name();
             reader.readNext();
             break;
         }
 
         if (reader.isStartElement()) {
+            DEBUG<<"Start"<<reader.name();
             if (reader.name() == "entry") {
                 readEntryElement(item);
             } else if (reader.name() == "page") {
@@ -99,8 +104,11 @@ void XmlStreamReader::readEntryElement(QTreeWidgetItem *parent)
 void XmlStreamReader::readPageElement(QTreeWidgetItem *parent)
 {
     QString page = reader.readElementText();
-    if (reader.isEndElement())
+    if (reader.isEndElement()){
+        DEBUG<<"End"<<reader.name();
         reader.readNext();
+    }
+
 
     QString allPages = parent->text(1);
     if (!allPages.isEmpty())
@@ -114,11 +122,13 @@ void XmlStreamReader::skipUnknownElement()
     reader.readNext();
     while (!reader.atEnd()) {
         if (reader.isEndElement()) {
+            DEBUG<<"End"<<reader.name();
             reader.readNext();
             break;
         }
 
         if (reader.isStartElement()) {
+            DEBUG<<"Start"<<reader.name();
             skipUnknownElement();
         } else {
             reader.readNext();

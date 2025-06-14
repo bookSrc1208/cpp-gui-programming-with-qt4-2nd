@@ -28,6 +28,7 @@ private:
     QTreeWidget *treeWidget;
     QTreeWidgetItem *currentItem;
     QString currentText;
+    bool pagestart = false;
 };
 
 #endif

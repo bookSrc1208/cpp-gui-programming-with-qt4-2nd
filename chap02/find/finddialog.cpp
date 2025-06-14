@@ -1,5 +1,4 @@
-//#include <QtGui>
-#include <QtWidgets>
+#include <QtGui>
 
 #include "finddialog.h"
 

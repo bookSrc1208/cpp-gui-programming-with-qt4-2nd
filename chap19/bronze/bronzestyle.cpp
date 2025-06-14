@@ -1,4 +1,23 @@
-#include <QtGui>
+#include <QPalette>
+#include <QPixmap>
+#include <QColor>
+
+#include <QWidget>
+#include <QAbstractButton>
+#include <QAbstractSpinBox>
+#include <QStyleOption>
+#include <QStyleHintReturn>
+#include <QDialogButtonBox>
+#include <QProxyStyle>
+#include <QPainter>
+#include <QStyleOptionComplex>
+#include <QRect>
+#include <QPen>
+#include <QIcon>
+#include <QLinearGradient>
+#include <QStyleOptionButton>
+
+
 
 #include "bronzestyle.h"
 
@@ -48,7 +67,7 @@ int BronzeStyle::styleHint(StyleHint which, const QStyleOption *option,
     case SH_UnderlineShortcut:
         return int(false);
     default:
-        return QWindowsStyle::styleHint(which, option, widget,
+        return QProxyStyle::styleHint(which, option, widget,
                                         returnData);
     }
 }
@@ -68,7 +87,7 @@ int BronzeStyle::pixelMetric(PixelMetric which,
     case PM_DefaultFrameWidth:
         return 2;
     default:
-        return QWindowsStyle::pixelMetric(which, option, widget);
+        return QProxyStyle::pixelMetric(which, option, widget);
     }
 }
 
@@ -90,7 +109,7 @@ void BronzeStyle::drawPrimitive(PrimitiveElement which,
     case PE_FrameDefaultButton:
         break;
     default:
-        QWindowsStyle::drawPrimitive(which, option, painter, widget);
+        QProxyStyle::drawPrimitive(which, option, painter, widget);
     }
 }
 
@@ -110,7 +129,7 @@ void BronzeStyle::drawComplexControl(ComplexControl which,
         painter->drawLine(rect.topLeft(), rect.bottomLeft());
         painter->drawLine(rect.topRight(), rect.bottomRight());
     } else {
-        return QWindowsStyle::drawComplexControl(which, option, painter,
+        return QProxyStyle::drawComplexControl(which, option, painter,
                                                  widget);
     }
 }
@@ -146,7 +165,7 @@ QRect BronzeStyle::subControlRect(ComplexControl whichControl,
             return QRect();
         }
     } else {
-        return QWindowsStyle::subControlRect(whichControl, option,
+        return QProxyStyle::subControlRect(whichControl, option,
                                              whichSubControl, widget);
     }
 }
@@ -154,7 +173,7 @@ QRect BronzeStyle::subControlRect(ComplexControl whichControl,
 QIcon BronzeStyle::standardIconImplementation(StandardPixmap which,
         const QStyleOption *option, const QWidget *widget) const
 {
-    QImage image = QWindowsStyle::standardPixmap(which, option, widget)
+    QImage image = QProxyStyle::standardPixmap(which, option, widget)
                    .toImage();
     if (image.isNull())
         return QIcon();

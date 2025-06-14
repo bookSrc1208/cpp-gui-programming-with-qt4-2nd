@@ -1,4 +1,7 @@
 #include <QtGui>
+#include <QTableView>
+#include <QHeaderView>
+#include <QHBoxLayout>
 #include <QtSql>
 
 #include "scooterwindow.h"

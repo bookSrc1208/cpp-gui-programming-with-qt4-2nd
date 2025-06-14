@@ -1,9 +1,32 @@
-#include <QtGui>
+#include <QSplitter>
 #include <QtSql>
+#include <Qt>
+#include <QFrame>
+#include <QPushButton>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
+#include <QModelIndex>
+#include <QSqlRecord>
+#include <QString>
+#include <QSqlDatabase>
+#include <QMessageBox>
+#include <QWidget>
+#include <QSqlRelationalTableModel>
+#include <QSqlRelation>
+#include <QTableView>
+#include <QSqlRelationalDelegate>
+#include <QAbstractItemView>
+#include <QLabel>
+#include <QVBoxLayout>
+#include <QSplitter>
+#include <QHeaderView>
+
 
 #include "employeeform.h"
 #include "mainform.h"
+#include <QDebug>
 
+#define DEBUG  qDebug()<<Q_FUNC_INFO<<__LINE__
 MainForm::MainForm()
 {
     createDepartmentPanel();
@@ -112,7 +135,7 @@ void MainForm::editEmployees()
         QSqlRecord record = employeeModel->record(index.row());
         employeeId = record.value(Employee_Id).toInt();
     }
-
+    //应该用 Employee_DepartmentId
     EmployeeForm form(employeeId, this);
     form.exec();
     updateEmployeeView();

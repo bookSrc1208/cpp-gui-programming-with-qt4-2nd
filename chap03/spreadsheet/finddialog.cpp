@@ -1,8 +1,16 @@
-ï»¿#include <QtWidgets>
+#include <QWidget>
+#include <QDialog>
+#include <QLabel>
+#include <QLineEdit>
+#include <QCheckBox>
+#include <QPushButton>
+#include <QString>
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 #include "finddialog.h"
 
-// è¿™ä¸ªå¯¹è¯æ¡†æ²¡ç”¨ç•Œé¢è®¾è®¡å™¨ï¼Œæ‰€ä»¥åªéœ€å¼•å…¥é™„å±çš„.h.moc.cpp
+// Õâ¸ö¶Ô»°¿òÃ»ÓÃ½çÃæÉè¼ÆÆ÷£¬ËùÒÔÖ»ĞèÒıÈë¸½ÊôµÄ.h.moc.cpp
 // using nocheck finddialog.h.moc.cpp
 // cpps-make finddialog.h.moc.cpp : finddialog.h // moc finddialog.h -o finddialog.h.moc.cpp
 

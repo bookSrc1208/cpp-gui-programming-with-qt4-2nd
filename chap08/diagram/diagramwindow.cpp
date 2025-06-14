@@ -1,4 +1,19 @@
-ï»¿#include <QtWidgets>
+#include <QGraphicsScene>
+#include <QGraphicsView>
+#include <QPainter>
+#include <QGraphicsItem>
+#include <QString>
+#include <QApplication>
+#include <QStringList>
+#include <QColor>
+#include <QColorDialog>
+#include <QAction>
+#include <QIcon>
+#include <QPoint>
+#include <QToolBar>
+#include <QMenu>
+#include <QMenuBar>
+#include <QClipboard>
 
 #include "diagramwindow.h"
 #include "link.h" // usingcpp
@@ -56,9 +71,9 @@ void DiagramWindow::addLink()
     scene->addItem(link);
 }
 
-// å¯ä»¥é€‰ä¸­å¤šä¸ªå…ƒç´ ï¼Œç„¶åæŒ‰delé”®ã€‚
-// åˆ é™¤èŠ‚ç‚¹ï¼ŒèŠ‚ç‚¹å…³è”çš„è¾¹ä¹Ÿä¼šè¢«åˆ é™¤(è¾¹æ˜¯ä¾é™„äºèŠ‚ç‚¹çš„)
-// ä¹Ÿå¯ä»¥ç‹¬ç«‹åˆ é™¤è¾¹(èŠ‚ç‚¹ä¸ä¼šå—å½±å“)
+// ¿ÉÒÔÑ¡ÖĞ¶à¸öÔªËØ£¬È»ºó°´del¼ü¡£
+// É¾³ı½Úµã£¬½Úµã¹ØÁªµÄ±ßÒ²»á±»É¾³ı(±ßÊÇÒÀ¸½ÓÚ½ÚµãµÄ)
+// Ò²¿ÉÒÔ¶ÀÁ¢É¾³ı±ß(½Úµã²»»áÊÜÓ°Ïì)
 void DiagramWindow::del()
 {
     QList<QGraphicsItem *> items = scene->selectedItems();
@@ -98,7 +113,7 @@ void DiagramWindow::copy()
     QApplication::clipboard()->setText(str);
 }
 
-// å°†èŠ‚ç‚¹å¤åˆ¶åˆ°å‰ªè´´æ¿çš„å†…å®¹å½¢å¦‚Node #008000 #000080 #ffffff Node 1
+// ½«½Úµã¸´ÖÆµ½¼ôÌù°åµÄÄÚÈİĞÎÈçNode #008000 #000080 #ffffff Node 1
 void DiagramWindow::paste()
 {
     QString str = QApplication::clipboard()->text();
@@ -134,18 +149,19 @@ void DiagramWindow::properties()
     if (node) {
         PropertiesDialog dialog(node, this);
         dialog.exec();
-    } else if (link) { // æ ¹æœ¬èµ°ä¸åˆ°è¿™ä¸ªåˆ†æ”¯ï¼Œå› ä¸ºåªé€‰ä¸­è¾¹ï¼Œèœå•ä¸­çš„å±æ€§èœå•é¡¹æ˜¯ç°çš„
+    } else if (link) { // ¸ù±¾×ß²»µ½Õâ¸ö·ÖÖ§£¬ÒòÎªÖ»Ñ¡ÖĞ±ß£¬²Ëµ¥ÖĞµÄÊôĞÔ²Ëµ¥ÏîÊÇ»ÒµÄ
         QColor color = QColorDialog::getColor(link->color(), this);
         if (color.isValid())
             link->setColor(color);
     }
 }
 
-// æ ¹æ®å½“å‰çš„çŠ¶å†µï¼Œè°ƒæ•´èœå•é¡¹ã€å·¥å…·æ æŒ‰é’®çš„ä½¿èƒ½/ç¦ç”¨çŠ¶æ€
+// ¸ù¾İµ±Ç°µÄ×´¿ö£¬µ÷Õû²Ëµ¥Ïî¡¢¹¤¾ßÀ¸°´Å¥µÄÊ¹ÄÜ/½ûÓÃ×´Ì¬
 void DiagramWindow::updateActions()
 {
     bool hasSelection = !scene->selectedItems().isEmpty();
     bool isNode = (selectedNode() != 0);
+    bool isLink = (selectedLink() !=0);
     bool isNodePair = (selectedNodePair() != NodePair());
 
     cutAction->setEnabled(isNode);
@@ -154,9 +170,9 @@ void DiagramWindow::updateActions()
     deleteAction->setEnabled(hasSelection);
     bringToFrontAction->setEnabled(isNode);
     sendToBackAction->setEnabled(isNode);
-    propertiesAction->setEnabled(isNode);
+    propertiesAction->setEnabled(isNode | isLink);
 
-    // ä¸‹é¢ä¸¤ä¸ªå¾ªç¯æ˜¯åœ¨æ„é€ viewçš„å³é”®èœå•
+    // ÏÂÃæÁ½¸öÑ­»·ÊÇÔÚ¹¹ÔìviewµÄÓÒ¼ü²Ëµ¥
     foreach (QAction *action, view->actions())
         view->removeAction(action);
 

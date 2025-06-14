@@ -1,5 +1,8 @@
-#include <QtGui>
+#include <QTreeWidget>
+#include <QTreeWidgetItem>
+#include <QHeaderView>
 #include <QtXml>
+#include <QApplication>
 #include <iostream>
 
 void populateTree(QTreeWidget *treeWidget)
@@ -8,12 +11,12 @@ void populateTree(QTreeWidget *treeWidget)
     labels << QObject::tr("Terms") << QObject::tr("Pages");
 
     treeWidget->setHeaderLabels(labels);
-    treeWidget->header()->setResizeMode(QHeaderView::Stretch);
+    treeWidget->header()->setSectionResizeMode(QHeaderView::Stretch);
     treeWidget->setWindowTitle(QObject::tr("XML Stream Writer"));
     treeWidget->show();
 
     (void) new QTreeWidgetItem(treeWidget,
-            QStringList() << "sidebearings" << "10, 34-35, 307-308");
+            QStringList() << "sidebearings" << "10<, 34-35, 307-308");
     QTreeWidgetItem *subterm = new QTreeWidgetItem(treeWidget,
             QStringList() << "subtraction");
     (void) new QTreeWidgetItem(subterm,

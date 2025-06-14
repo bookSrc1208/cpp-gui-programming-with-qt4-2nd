@@ -1,7 +1,9 @@
 #include <QtCore>
+#include <QDebug>
 
 #include "citymodel.h"
 
+#define DEBUG qDebug()<<Q_FUNC_INFO<<__LINE__
 CityModel::CityModel(QObject *parent)
     : QAbstractTableModel(parent)
 {
@@ -12,7 +14,10 @@ void CityModel::setCities(const QStringList &cityNames)
     cities = cityNames;
     distances.resize(cities.count() * (cities.count() - 1) / 2);
     distances.fill(0);
-    reset();
+    //reset();
+        beginResetModel();
+        this->resetInternalData();
+        this->endResetModel();
 }
 
 int CityModel::rowCount(const QModelIndex & /* parent */) const
@@ -29,13 +34,15 @@ QVariant CityModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid())
         return QVariant();
-
+ //DEBUG<<"role"<<index.row() <<index.column()<<role;
     if (role == Qt::TextAlignmentRole) {
         return int(Qt::AlignRight | Qt::AlignVCenter);
-    } else if (role == Qt::DisplayRole) {
+    } else if (role == Qt::DisplayRole || role == Qt::EditRole) {
         if (index.row() == index.column())
             return 0;
+
         int offset = offsetOf(index.row(), index.column());
+        //DEBUG<<index.row() <<index.column()<<distances[offset];
         return distances[offset];
     }
     return QVariant();
@@ -46,13 +53,15 @@ bool CityModel::setData(const QModelIndex &index,
 {
     if (index.isValid() && index.row() != index.column()
             && role == Qt::EditRole) {
+
+        DEBUG<<index.row() <<index.column();
         int offset = offsetOf(index.row(), index.column());
         distances[offset] = value.toInt();
 
         QModelIndex transposedIndex = createIndex(index.column(),
                                                   index.row());
-        emit dataChanged(index, index);
-        emit dataChanged(transposedIndex, transposedIndex);
+//        emit dataChanged(index, index);
+//        emit dataChanged(transposedIndex, transposedIndex);
         return true;
     }
     return false;

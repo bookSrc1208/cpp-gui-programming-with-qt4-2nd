@@ -1,3 +1,4 @@
+//#include <QtGui>
 #include <QtWidgets>
 
 #include "cell.h"

@@ -1,4 +1,15 @@
-#include <QtGui>
+#include <QWidget>
+#include <QDialog>
+#include <QDirModel>
+#include <QDir>
+#include <QTreeView>
+#include <QPushButton>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
+#include <QModelIndex>
+#include <QInputDialog>
+#include <QMessageBox>
+#include <QHeaderView>
 
 #include "directoryviewer.h"
 
@@ -14,7 +25,7 @@ DirectoryViewer::DirectoryViewer(QWidget *parent)
     treeView->header()->setStretchLastSection(true);
     treeView->header()->setSortIndicator(0, Qt::AscendingOrder);
     treeView->header()->setSortIndicatorShown(true);
-    treeView->header()->setClickable(true);
+    treeView->header()->setSectionsClickable(true);
 
     QModelIndex index = model->index(QDir::currentPath());
     treeView->expand(index);

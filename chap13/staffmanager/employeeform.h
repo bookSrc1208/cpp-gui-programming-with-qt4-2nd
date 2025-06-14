@@ -55,6 +55,7 @@ private:
     QPushButton *deleteButton;
     QPushButton *closeButton;
     QDialogButtonBox *buttonBox;
+    int departmentId = -1;
 };
 
 #endif

@@ -48,6 +48,7 @@ void Ticker::timerEvent(QTimerEvent *event)
         if (offset >= fontMetrics().width(text()))
             offset = 0;
         scroll(-1, 0);
+        //update();
     } else {
         QWidget::timerEvent(event);
     }

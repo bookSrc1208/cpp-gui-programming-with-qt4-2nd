@@ -1,4 +1,5 @@
 #include <QtCore>
+#include <QDebug>
 #include <cstdio>
 
 void tidyFile(QIODevice *inDevice, QIODevice *outDevice)
@@ -49,10 +50,19 @@ int main()
     QFile inFile;
     QFile outFile;
 
-    inFile.open(stdin, QFile::ReadOnly);
-    outFile.open(stdout, QFile::WriteOnly);
+//    inFile.open(stdin, QFile::ReadOnly);
+//    outFile.open(stdout, QFile::WriteOnly);
 
-    tidyFile(&inFile, &outFile);
+//    tidyFile(&inFile, &outFile);
 
+    QTemporaryFile tmpFile("aa.tmp");
+    if(!tmpFile.open()){
+        return -1;
+    }
+    QString fname = tmpFile.fileName();
+    qDebug()<<fname;
+QTextStream out(tmpfile());
+out<<"werfweafwef";
+tmpFile.close();
     return 0;
 }

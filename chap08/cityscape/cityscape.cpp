@@ -1,4 +1,5 @@
-#include <QtWidgets>
+#include <QtGui>
+#include <QDateTime>
 
 #include "annotation.h" // usingcpp
 #include "cityblock.h" // usingcpp

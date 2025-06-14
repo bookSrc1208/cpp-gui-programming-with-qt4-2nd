@@ -1,4 +1,6 @@
-#include <QtGui>
+#include <QLabel>
+#include <QLineEdit>
+#include <QGridLayout>
 #include <QtNetwork>
 
 #include "weatherstation.h"

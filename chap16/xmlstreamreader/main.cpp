@@ -1,4 +1,6 @@
-#include <QtGui>
+#include <QApplication>
+#include <QHeaderView>
+#include <QTreeWidget>
 #include <iostream>
 
 #include "xmlstreamreader.h"
@@ -19,7 +21,7 @@ int main(int argc, char *argv[])
 
     QTreeWidget treeWidget;
     treeWidget.setHeaderLabels(labels);
-    treeWidget.header()->setResizeMode(QHeaderView::Stretch);
+    treeWidget.header()->setSectionResizeMode(QHeaderView::Stretch);
     treeWidget.setWindowTitle(QObject::tr("XML Stream Reader"));
     treeWidget.show();
 

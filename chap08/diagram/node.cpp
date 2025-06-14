@@ -1,29 +1,36 @@
-ï»¿#include <QtWidgets>
-//#include <iostream>
+#include <QInputDialog>
+#include <QLineEdit>
+#include <QGraphicsSceneMouseEvent>
+#include <QFontMetricsF>
+#include <QStyleOptionGraphicsItem>
+#include <QPainter>
+#include <QFont>
+#include <QtDebug>
+
 #include "link.h"
 #include "node.h"
 
-
-
+#define DEBUG     qDebug()<<Q_FUNC_INFO<<__LINE__
 Node::Node()
 {
+
     myTextColor = Qt::darkGreen;
     myOutlineColor = Qt::darkBlue;
     myBackgroundColor = Qt::white;
 
-    setFlags(ItemIsMovable | ItemIsSelectable | ItemSendsGeometryChanges);
+    setFlags(ItemIsMovable | ItemIsSelectable |ItemSendsGeometryChanges);
 }
 
 Node::~Node()
 {
-    // è¾¹æ˜¯ä»Žå±žäºŽèŠ‚ç‚¹çš„
+    // ±ßÊÇ´ÓÊôÓÚ½ÚµãµÄ
     foreach (Link *link, myLinks)
         delete link;
 }
 
 void Node::setText(const QString &text)
 {
-    prepareGeometryChange(); // æ–‡æœ¬å˜äº†å¯èƒ½ä¼šå¯¼è‡´èŠ‚ç‚¹å¤§å°çš„å˜åŒ–
+    prepareGeometryChange(); // ÎÄ±¾±äÁË¿ÉÄÜ»áµ¼ÖÂ½Úµã´óÐ¡µÄ±ä»¯
     myText = text;
     update();
 }
@@ -79,7 +86,7 @@ void Node::removeLink(Link *link)
 QRectF Node::boundingRect() const
 {
     const int Margin = 1;
-    // åœ¨è¾¹æ¡†ä¹‹å¤–å†åŠ ä¸Šç™½è¾¹
+    // ÔÚ±ß¿òÖ®ÍâÔÙ¼ÓÉÏ°×±ß
     return outlineRect().adjusted(-Margin, -Margin, +Margin, +Margin);
 }
 
@@ -98,7 +105,7 @@ void Node::paint(QPainter *painter,
                  QWidget * /* widget */)
 {
     QPen pen(myOutlineColor);
-    if (option->state & QStyle::State_Selected) { // é€‰ä¸­èŠ‚ç‚¹çš„è¾¹æ¡†ä¸ºè™šçº¿
+    if (option->state & QStyle::State_Selected) { // Ñ¡ÖÐ½ÚµãµÄ±ß¿òÎªÐéÏß
         pen.setStyle(Qt::DotLine);
         pen.setWidth(2);
     }
@@ -113,7 +120,7 @@ void Node::paint(QPainter *painter,
     painter->drawText(rect, Qt::AlignCenter, myText);
 }
 
-// åŒå‡»ç¼–è¾‘èŠ‚ç‚¹æ–‡å­—
+// Ë«»÷±à¼­½ÚµãÎÄ×Ö
 void Node::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 {
     QString text = QInputDialog::getText(event->widget(),
@@ -126,12 +133,12 @@ void Node::mouseDoubleClickEvent(QGraphicsSceneMouseEvent *event)
 QVariant Node::itemChange(GraphicsItemChange change,
                           const QVariant &value)
 {
-    //qDebug() << change << '\n';
+    //DEBUG<<change;
     if (change == ItemPositionHasChanged) {
         foreach (Link *link, myLinks)
-            link->trackNodes(); // çœ‹æ„æ€æ˜¯ç§»åŠ¨èŠ‚ç‚¹åŽï¼Œè¾¹ä¼šè·Ÿç€åŠ¨ã€‚ä½†å®žæµ‹å‘çŽ°è¾¹å¹¶æ²¡è·Ÿç€åŠ¨
-        // å‘çŽ°åŽŸæ¥æ˜¯ç§»åŠ¨èŠ‚ç‚¹æ—¶ï¼Œæœ¬å‡½æ•°å¹¶æœªè¢«è°ƒç”¨ã€‚åŽŸæ¥åœ¨Qt 5.9.2ä¸­éœ€è¦è®¾ç½®ItemSendsGeometryChangesæ‰è¡Œ
-        // å‚è€ƒï¼šhttps://stackoverflow.com/questions/8187807/itemchanged-never-called-on-qgraphicsitem
+            link->trackNodes(); // ¿´ÒâË¼ÊÇÒÆ¶¯½Úµãºó£¬±ß»á¸ú×Å¶¯¡£µ«Êµ²â·¢ÏÖ±ß²¢Ã»¸ú×Å¶¯
+        // ·¢ÏÖÔ­À´ÊÇÒÆ¶¯½ÚµãÊ±£¬±¾º¯Êý²¢Î´±»µ÷ÓÃ¡£Ô­À´ÔÚQt 5.9.2ÖÐÐèÒªÉèÖÃItemSendsGeometryChanges²ÅÐÐ
+        // ²Î¿¼£ºhttps://stackoverflow.com/questions/8187807/itemchanged-never-called-on-qgraphicsitem
     }
     return QGraphicsItem::itemChange(change, value);
 }
@@ -139,13 +146,13 @@ QVariant Node::itemChange(GraphicsItemChange change,
 QRectF Node::outlineRect() const
 {
     const int Padding = 8;
-    QFontMetricsF metrics = (QFontMetricsF)qApp->font();
+    QFontMetricsF metrics(qApp->font());
     QRectF rect = metrics.boundingRect(myText);
 //    qDebug() << "rect1:" <<  rect << '\n';
-    // æ–‡å­—æ¡†å››å‘¨åŠ ä¸Šå¡«å……
+    // ÎÄ×Ö¿òËÄÖÜ¼ÓÉÏÌî³ä
     rect.adjust(-Padding, -Padding, +Padding, +Padding);
 //    qDebug() << "rect2:" <<  rect << '\n';
-    rect.translate(-rect.center());  // å°†çŸ©å½¢å››ä¸ªè§’çš„åæ ‡å‡åŽ»çŸ©å½¢ä¸­å¿ƒçš„åæ ‡(é¬¼çŸ¥é“æ­¤æ—¶åŽŸç‚¹åœ¨å“ªé‡Œ)ï¼Œå¾—åˆ°çš„å››ä¸ªåæ ‡æ˜¯ä»¥çŸ©å½¢ä¸­å¿ƒä¸ºåŽŸç‚¹çš„
+    rect.translate(-rect.center());  // ½«¾ØÐÎËÄ¸ö½ÇµÄ×ø±ê¼õÈ¥¾ØÐÎÖÐÐÄµÄ×ø±ê(¹íÖªµÀ´ËÊ±Ô­µãÔÚÄÄÀï)£¬µÃµ½µÄËÄ¸ö×ø±êÊÇÒÔ¾ØÐÎÖÐÐÄÎªÔ­µãµÄ
 //    qDebug() << "rect3:" <<  rect << '\n';
     return rect;
 }

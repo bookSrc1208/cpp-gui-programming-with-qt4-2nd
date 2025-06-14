@@ -1,8 +1,10 @@
-#include <QtGui>
+#include <QTreeWidgetItem>
+#include <QtXml>
+#include <QDebug>
 #include <iostream>
 
 #include "saxhandler.h"
-
+#define DEBUG             qDebug()<<Q_FUNC_INFO<<__LINE__
 SaxHandler::SaxHandler(QTreeWidget *tree)
 {
     treeWidget = tree;
@@ -11,7 +13,7 @@ SaxHandler::SaxHandler(QTreeWidget *tree)
 bool SaxHandler::readFile(const QString &fileName)
 {
     currentItem = 0;
-
+pagestart = false;
     QFile file(fileName);
     QXmlInputSource inputSource(&file);
     QXmlSimpleReader reader;
@@ -31,13 +33,17 @@ bool SaxHandler::startElement(const QString & /* namespaceURI */,
         currentItem->setText(0, attributes.value("term"));
     } else if (qName == "page") {
         currentText.clear();
+        pagestart = true;
     }
     return true;
 }
 
 bool SaxHandler::characters(const QString &str)
 {
-    currentText += str;
+    if(pagestart){
+        currentText += str;
+        DEBUG<<currentText;
+    }
     return true;
 }
 
@@ -54,6 +60,7 @@ bool SaxHandler::endElement(const QString & /* namespaceURI */,
                 allPages += ", ";
             allPages += currentText;
             currentItem->setText(1, allPages);
+            pagestart = false;
         }
     }
     return true;

@@ -1,4 +1,25 @@
-#include <QtGui>
+#include <QLabel>
+#include <QPalette>
+#include <Qt>
+#include <QString>
+#include <QCloseEvent>
+#include <QFileDialog>
+#include <QFile>
+#include <QMessageBox>
+#include <QDir>
+#include <QDialog>
+#include <QSize>
+#include <QPixmap>
+#include <QAction>
+#include <QKeySequence>
+#include <QAction>
+#include <QImage>
+#include <QApplication>
+#include <QImageReader>
+#include <QFileInfo>
+#include <QMenuBar>
+#include <QStatusBar>
+#include <QMenu>
 
 #include "imagewindow.h"
 #include "ui_resizedialog.h"

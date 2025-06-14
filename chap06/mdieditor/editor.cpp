@@ -1,4 +1,18 @@
-#include <QtGui>
+#include <QWidget>
+#include <QTextEdit>
+#include <QAction>
+#include <QPixmap>
+#include <QString>
+#include <QFileDialog>
+#include <QSize>
+#include <QCloseEvent>
+#include <QMessageBox>
+#include <QFile>
+#include <QIODevice>
+#include <QTextStream>
+#include <QApplication>
+#include <QFileInfo>
+
 
 #include "editor.h"
 

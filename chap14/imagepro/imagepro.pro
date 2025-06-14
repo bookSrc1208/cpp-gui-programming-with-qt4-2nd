@@ -1,3 +1,5 @@
+QT  += gui core widgets
+
 TEMPLATE      = app
 HEADERS       = imagewindow.h \
                 transactionthread.h

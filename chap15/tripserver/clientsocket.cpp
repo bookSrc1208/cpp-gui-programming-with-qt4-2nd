@@ -1,6 +1,8 @@
 #include <QtNetwork>
+#include <QDebug>
 
 #include "clientsocket.h"
+#define DEBUG qDebug()<<Q_FUNC_INFO<<__LINE__
 
 ClientSocket::ClientSocket(QObject *parent)
     : QTcpSocket(parent)
@@ -21,6 +23,7 @@ void ClientSocket::readClient()
             return;
         in >> nextBlockSize;
     }
+    DEBUG<<nextBlockSize;
 
     if (bytesAvailable() < nextBlockSize)
         return;

@@ -1,4 +1,6 @@
-#include <QtGui>
+//#include <QtGui>
+#include <QtWidgets>
+#include <QDebug>
 #include <iostream>
 
 qlonglong imageSpace(const QString &path)
@@ -9,7 +11,7 @@ qlonglong imageSpace(const QString &path)
     QStringList filters;
     foreach (QByteArray format, QImageReader::supportedImageFormats())
         filters += "*." + format;
-
+//qDebug()<<filters;
     foreach (QString file, dir.entryList(filters, QDir::Files))
         size += QFileInfo(dir, file).size();
 

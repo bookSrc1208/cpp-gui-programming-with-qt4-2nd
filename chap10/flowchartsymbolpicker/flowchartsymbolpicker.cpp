@@ -1,6 +1,12 @@
-#include <QtGui>
-
+//#include <QtGui>
+#include <QListWidget>
+#include <QListWidgetItem>
+#include <QDialogButtonBox>
+#include <QVBoxLayout>
+#include <QDebug>
 #include "flowchartsymbolpicker.h"
+
+#define DEBUG qDebug()<<Q_FUNC_INFO<<__LINE__
 
 FlowChartSymbolPicker::FlowChartSymbolPicker(
         const QMap<int, QString> &symbolMap, QWidget *parent)
@@ -36,11 +42,15 @@ FlowChartSymbolPicker::FlowChartSymbolPicker(
 
 void FlowChartSymbolPicker::done(int result)
 {
+    DEBUG<<result;
     id = -1;
     if (result == QDialog::Accepted) {
         QListWidgetItem *item = listWidget->currentItem();
-        if (item)
+        if (item){
             id = item->data(Qt::UserRole).toInt();
+             DEBUG<<id;
+        }
+
     }
     QDialog::done(result);
 }

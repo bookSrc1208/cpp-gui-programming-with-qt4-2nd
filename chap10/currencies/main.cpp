@@ -1,4 +1,5 @@
-#include <QtGui>
+#include <QTableView>
+#include <QApplication>
 
 #include "currencymodel.h"
 
@@ -7,7 +8,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     QMap<QString, double> currencyMap;
-    currencyMap.insert("AUD", 1.3259);
+    currencyMap.insert("AUD", 1.3259);//相对于美元汇率
     currencyMap.insert("CHF", 1.2970);
     currencyMap.insert("CZK", 24.510);
     currencyMap.insert("DKK", 6.2168);

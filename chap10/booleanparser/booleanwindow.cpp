@@ -1,3 +1,7 @@
+#include <QLabel>
+#include <QLineEdit>
+#include <QTreeView>
+#include <QGridLayout>
 #include <QtGui>
 
 #include "booleanmodel.h"

@@ -1,4 +1,5 @@
-#include <QtGui>
+#include <QApplication>
+#include <QPushButton>
 #include <iostream>
 
 #include "tripserver.h"

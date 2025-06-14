@@ -1,3 +1,4 @@
+QT  += core gui widgets
 TEMPLATE      = app
 CONFIG       += console thread
 HEADERS       = thread.h \
@@ -5,5 +6,3 @@ HEADERS       = thread.h \
 SOURCES       = main.cpp \
                 thread.cpp \
                 threaddialog.cpp
-
-QT += widgets
