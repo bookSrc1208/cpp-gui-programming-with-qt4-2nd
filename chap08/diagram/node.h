@@ -6,11 +6,13 @@
 #include <QGraphicsItem>
 #include <QSet>
 
+QT_BEGIN_NAMESPACE
 class Link;
+QT_END_NAMESPACE
 
 class Node : public QGraphicsItem
 {
-    Q_DECLARE_TR_FUNCTIONS(Node) // 鍥犱负QGraphicsItem骞朵笉鏄疩Object鐨勬淳鐢熺被
+    Q_DECLARE_TR_FUNCTIONS(Node) // 因为QGraphicsItem并不是QObject的派生类
 
 public:
     Node();
@@ -28,9 +30,9 @@ public:
     void addLink(Link *link);
     void removeLink(Link *link);
 
-    // 姣忎釜item閮藉緱閲嶅啓杩欎釜杩欎釜鍑芥暟锛屽湪鏈緥涓紝绾︽潫妗嗗寘鎷簡杈规涓庤竟妗嗕箣澶栫殑鐧借竟
+    // 每个item都得重写这个这个函数，在本例中，约束框包括了边框与边框之外的白边
     QRectF boundingRect() const;
-    // 杩欎篃鏄釜铏氬嚱鏁帮紝榛樿鏄繑鍥瀊oundingRect鐨勭粨鏋溿�傛湰渚嬭妭鐐规槸鍦嗚鐭╁舰
+    // 这也是个虚函数，默认是返回boundingRect的结果。本例节点是圆角矩形
     QPainterPath shape() const;
     void paint(QPainter *painter,
                const QStyleOptionGraphicsItem *option, QWidget *widget);

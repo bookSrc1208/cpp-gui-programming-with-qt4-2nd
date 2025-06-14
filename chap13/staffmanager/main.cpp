@@ -1,4 +1,4 @@
-#include <QtGui>
+#include <QtWidgets>
 #include <QtSql>
 #include <QMessageBox>
 #include <QProgressDialog>
@@ -9,7 +9,7 @@
 
 bool createConnection()
 {
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    QSqlDatabase db = QSqlDatabase::addDatabase("QMYSQL"); // QSQLITE
     db.setDatabaseName("personnel.dat");
     if (!db.open()) {
         QMessageBox::warning(0, QObject::tr("Database Error"),

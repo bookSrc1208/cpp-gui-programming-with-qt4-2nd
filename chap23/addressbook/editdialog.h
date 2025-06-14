@@ -5,8 +5,10 @@
 
 #include "ui_editdialog.h"
 
+QT_BEGIN_NAMESPACE
 class QTreeWidget;
 class ABItem;
+QT_END_NAMESPACE
 
 class EditDialog : public QDialog, private Ui::EditDialog
 {

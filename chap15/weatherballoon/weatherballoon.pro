@@ -1,5 +1,5 @@
 TEMPLATE      = app
-QT           += network core widgets gui
+QT           += network widgets
 HEADERS       = weatherballoon.h
 SOURCES       = main.cpp \
                 weatherballoon.cpp

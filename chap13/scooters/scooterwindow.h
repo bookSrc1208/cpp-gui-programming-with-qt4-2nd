@@ -3,8 +3,10 @@
 
 #include <QWidget>
 
+QT_BEGIN_NAMESPACE
 class QSqlTableModel;
 class QTableView;
+QT_END_NAMESPACE
 
 enum {
     Scooter_Id = 0,

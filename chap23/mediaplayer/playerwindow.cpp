@@ -1,11 +1,14 @@
-#include <QtGui>
+#include <QtWidgets>
 #include <QAxWidget>
-
+#include <QDebug>
 #include "playerwindow.h"
+
+#define DEBUG     qDebug()<<__LINE__
 
 PlayerWindow::PlayerWindow()
 {
     wmp = new QAxWidget;
+
     wmp->setControl("{22D6F312-B0F6-11D0-94AB-0080C74C7E95}");
     wmp->setProperty("ShowControls", false);
     wmp->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
@@ -94,6 +97,7 @@ void PlayerWindow::onPlayStateChange(int, int newState)
 
 void PlayerWindow::onReadyStateChange(ReadyStateConstants ready)
 {
+    DEBUG<<ready;
     if (ready == Complete) {
         double duration = 60 * wmp->property("Duration").toDouble();
         seekSlider->setMinimum(0);

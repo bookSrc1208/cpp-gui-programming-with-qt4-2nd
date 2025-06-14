@@ -8,6 +8,7 @@
 class BasicEffectsPlugin : public QObject, public TextArtInterface
 {
     Q_OBJECT
+	Q_PLUGIN_METADATA(IID "com.software-inc.TextArt.TextArtInterface/1.0" FILE "basiceffectsplugin.json")
     Q_INTERFACES(TextArtInterface)
 
 public:

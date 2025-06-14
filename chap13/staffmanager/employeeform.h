@@ -3,6 +3,7 @@
 
 #include <QDialog>
 
+QT_BEGIN_NAMESPACE
 class QComboBox;
 class QDataWidgetMapper;
 class QDateEdit;
@@ -11,6 +12,7 @@ class QLabel;
 class QLineEdit;
 class QPushButton;
 class QSqlRelationalTableModel;
+QT_END_NAMESPACE
 
 enum {
     Employee_Id = 0,
@@ -55,7 +57,6 @@ private:
     QPushButton *deleteButton;
     QPushButton *closeButton;
     QDialogButtonBox *buttonBox;
-    int departmentId = -1;
 };
 
 #endif

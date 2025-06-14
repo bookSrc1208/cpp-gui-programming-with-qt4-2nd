@@ -1,10 +1,12 @@
 
-QT       += core gui widgets
+TEMPLATE = app
+TARGET = plotter
+DEPENDPATH += .
+INCLUDEPATH += .
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+QT += widgets
 
-TEMPLATE      = app
-HEADERS       = plotter.h
-SOURCES       = main.cpp \
-                plotter.cpp
-RESOURCES     = plotter.qrc
+# Input
+HEADERS += plotter.h
+SOURCES += main.cpp plotter.cpp
+RESOURCES += plotter.qrc

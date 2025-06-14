@@ -1,11 +1,14 @@
-#include <QtGui>
-
+#include <QtWidgets>
+#include <QDebug>
+#include <QFileInfo>
 #include "textartdialog.h"
 #include "textartinterface.h"
 
+#define DEBUG     qDebug()<<Q_FUNC_INFO<<__LINE__
 TextArtDialog::TextArtDialog(const QString &text, QWidget *parent)
     : QDialog(parent)
 {
+
     listWidget = new QListWidget;
     listWidget->setViewMode(QListWidget::IconMode);
     listWidget->setMovement(QListWidget::Static);
@@ -40,11 +43,11 @@ QPixmap TextArtDialog::selectedPixmap() const
 QDir TextArtDialog::directoryOf(const QString &subdir)
 {
     QDir dir(QApplication::applicationDirPath());
-
+DEBUG<<dir.absolutePath();
 #if defined(Q_OS_WIN)
     if (dir.dirName().toLower() == "debug"
             || dir.dirName().toLower() == "release")
-        dir.cdUp();
+        //dir.cdUp();
 #elif defined(Q_OS_MAC)
     if (dir.dirName() == "MacOS") {
         dir.cdUp();
@@ -52,18 +55,27 @@ QDir TextArtDialog::directoryOf(const QString &subdir)
         dir.cdUp();
     }
 #endif
+    DEBUG<<dir.absolutePath();
     dir.cd(subdir);
+    DEBUG<<dir.absolutePath();
     return dir;
 }
 
 void TextArtDialog::loadPlugins()
 {
     QDir pluginsDir = directoryOf("plugins");
+
     foreach (QString fileName, pluginsDir.entryList(QDir::Files)) {
+        QString fname = pluginsDir.absoluteFilePath(fileName);
+
         QPluginLoader loader(pluginsDir.absoluteFilePath(fileName));
-        if (TextArtInterface *interface =
-                    qobject_cast<TextArtInterface *>(loader.instance()))
-            interfaces.append(interface);
+DEBUG<<fname<<loader.isLoaded();
+        if (TextArtInterface *interface1 =
+                qobject_cast<TextArtInterface *>(loader.instance())){
+            interfaces.append(interface1);
+            DEBUG<<interface1;
+        }
+
     }
 }
 
@@ -79,11 +91,11 @@ void TextArtDialog::populateListWidget(const QString &text)
     gradient.setColorAt(0.8, QColor("darkgreen"));
     gradient.setColorAt(1.0, QColor("lightgreen"));
 
-    foreach (TextArtInterface *interface, interfaces) {
-        foreach (QString effect, interface->effects()) {
+    foreach (TextArtInterface *interface1, interfaces) {
+        foreach (QString effect, interface1->effects()) {
             QListWidgetItem *item = new QListWidgetItem(effect,
                                                         listWidget);
-            QPixmap pixmap = interface->applyEffect(effect, text, font,
+            QPixmap pixmap = interface1->applyEffect(effect, text, font,
                                                     iconSize, pen,
                                                     gradient);
             item->setData(Qt::DecorationRole, pixmap);

@@ -1,6 +1,9 @@
 #ifndef TEXTARTINTERFACE_H
 #define TEXTARTINTERFACE_H
 
+#include <QProxyStyle>
+
+QT_BEGIN_NAMESPACE
 class QBrush;
 class QFont;
 class QPen;
@@ -8,10 +11,13 @@ class QPixmap;
 class QSize;
 class QString;
 class QStringList;
+QT_END_NAMESPACE
 
 class TextArtInterface
 {
+
 public:
+
     virtual ~TextArtInterface() { }
 
     virtual QStringList effects() const = 0;

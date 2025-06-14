@@ -4,9 +4,11 @@
 #include <QDialog>
 #include <QList>
 
+QT_BEGIN_NAMESPACE
 class QDir;
 class QLineEdit;
 class QToolButton;
+QT_END_NAMESPACE
 
 class Calculator : public QDialog
 {

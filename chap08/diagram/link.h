@@ -3,7 +3,9 @@
 
 #include <QGraphicsLineItem>
 
+QT_BEGIN_NAMESPACE
 class Node;
+QT_END_NAMESPACE
 
 class Link : public QGraphicsLineItem
 {

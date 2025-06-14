@@ -1,4 +1,4 @@
-#include <QtGui>
+#include <QtWidgets>
 
 #include "extraeffectsplugin.h"
 
@@ -59,4 +59,4 @@ QPixmap ExtraEffectsPlugin::applyEffect(const QString &effect,
     return pixmap;
 }
 
-Q_EXPORT_PLUGIN2(extraeffectsplugin, ExtraEffectsPlugin)
+//Q_EXPORT_PLUGIN2(extraeffectsplugin, ExtraEffectsPlugin)

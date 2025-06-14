@@ -1,4 +1,4 @@
-#include <QApplication>
+#include <QtWidgets>
 
 #include "coordinatesetter.h"
 

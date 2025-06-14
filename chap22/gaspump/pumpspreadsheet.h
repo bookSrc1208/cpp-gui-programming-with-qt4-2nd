@@ -5,8 +5,10 @@
 #include <QTableWidget>
 #include <QTime>
 
+QT_BEGIN_NAMESPACE
 class QXmlStreamReader;
 class PumpFilter;
+QT_END_NAMESPACE
 
 class PumpSpreadsheet : public QTableWidget
 {

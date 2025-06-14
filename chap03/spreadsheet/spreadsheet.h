@@ -3,8 +3,10 @@
 
 #include <QTableWidget>
 
+QT_BEGIN_NAMESPACE
 class Cell;
 class SpreadsheetCompare;
+QT_END_NAMESPACE
 
 class Spreadsheet : public QTableWidget
 {

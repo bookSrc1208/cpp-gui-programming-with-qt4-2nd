@@ -1,4 +1,4 @@
-#include <QtGui>
+#include <QtWidgets>
 
 #include "basiceffectsplugin.h"
 
@@ -55,4 +55,3 @@ QPixmap BasicEffectsPlugin::applyEffect(const QString &effect,
     return pixmap;
 }
 
-Q_EXPORT_PLUGIN2(basiceffectsplugin, BasicEffectsPlugin)

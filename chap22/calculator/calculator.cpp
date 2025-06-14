@@ -1,9 +1,10 @@
-#include <QtGui>
+#include <QtWidgets>
 #include <QtScript>
+#include <QDebug>
 #include <cmath>
 
 #include "calculator.h"
-
+#define DEBUG qDebug()<<__LINE__
 Calculator::Calculator(QWidget *parent)
     : QDialog(parent)
 {
@@ -26,7 +27,7 @@ Calculator::Calculator(QWidget *parent)
     }
 
     pointButton = createButton(tr("."), SLOT(pointClicked()));
-    changeSignButton = createButton(tr("\261"),
+    changeSignButton = createButton(tr("\u00B1"), // \261
                                     SLOT(changeSignClicked()));
 
     backspaceButton = createButton(tr("Backspace"),
@@ -39,9 +40,9 @@ Calculator::Calculator(QWidget *parent)
     setMemoryButton = createButton(tr("MS"), SLOT(setMemory()));
     addToMemoryButton = createButton(tr("M+"), SLOT(addToMemory()));
 
-    divisionButton = createButton(tr("\367"),
+    divisionButton = createButton(tr("\u00F7"), // \367
                              SLOT(multiplicativeOperatorClicked()));
-    timesButton = createButton(tr("\327"),
+    timesButton = createButton(tr("\u00D7"), // \327
                                SLOT(multiplicativeOperatorClicked()));
     minusButton = createButton(tr("-"),
                                SLOT(additiveOperatorClicked()));
@@ -50,7 +51,7 @@ Calculator::Calculator(QWidget *parent)
 
     squareRootButton = createButton(tr("Sqrt"),
                                     SLOT(unaryOperatorClicked()));
-    powerButton = createButton(tr("x\262"),
+    powerButton = createButton(tr("x\u00B2"), // \262
                                SLOT(unaryOperatorClicked()));
     reciprocalButton = createButton(tr("1/x"),
                                     SLOT(unaryOperatorClicked()));
@@ -134,7 +135,7 @@ void Calculator::unaryOperatorClicked()
             return;
         }
         result = std::sqrt(operand);
-    } else if (clickedOperator == tr("x\262")) {
+    } else if (clickedOperator == tr("x\u00B2")) { //\262
         result = std::pow(operand, 2.0);
     } else if (clickedOperator == tr("1/x")) {
         if (operand == 0.0) {
@@ -275,15 +276,17 @@ void Calculator::customButtonClicked()
     in.setCodec("UTF-8");
     QString script = in.readAll();
     file.close();
-
+    DEBUG<<script;
     QScriptEngine interpreter;
     QScriptValue operand(&interpreter, display->text().toDouble());
     interpreter.globalObject().setProperty("x", operand);
     QScriptValue result = interpreter.evaluate(script);
+    DEBUG<<result.toString();
     if (!result.isNumber()) {
         abortOperation();
         return;
     }
+    DEBUG<<result.toNumber();
 
     setDisplayValue(result.toNumber());
     waitingForOperand = true;
@@ -352,6 +355,7 @@ void Calculator::createCustomButtons()
     QDir scriptsDir = directoryOf("scripts");
     QStringList fileNames = scriptsDir.entryList(QStringList("*.js"),
                                                  QDir::Files);
+    qDebug()<<scriptsDir.absolutePath()<<fileNames;
     foreach (QString fileName, fileNames) {
         QString text = fileName;
         text.chop(3);
@@ -398,9 +402,9 @@ bool Calculator::calculate(double rightOperand,
         sumSoFar += rightOperand;
     } else if (pendingOperator == tr("-")) {
         sumSoFar -= rightOperand;
-    } else if (pendingOperator == tr("\327")) {
+    } else if (pendingOperator == tr("\u00D7")) { // \327
         factorSoFar *= rightOperand;
-    } else if (pendingOperator == tr("\367")) {
+    } else if (pendingOperator == tr("\u00F7")) { // \367
         if (rightOperand == 0.0)
             return false;
         factorSoFar /= rightOperand;

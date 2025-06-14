@@ -1,5 +1,7 @@
-#include <QtGui>
+#include <QtWidgets>
 #include <QtScript>
+#include <QDebug>
+
 #include <iostream>
 
 #include "pumpspreadsheet.h"
@@ -7,9 +9,10 @@
 
 Q_DECLARE_METATYPE(PumpFilter)
 Q_DECLARE_METATYPE(PumpFilter *)
-
+#define DEBUG qDebug()<<__LINE__
 bool runScript(const QString &fileName, const QStringList &args)
 {
+    DEBUG<<fileName;
     QFile file(fileName);
     if (!file.open(QIODevice::ReadOnly)) {
         std::cerr << "Error: Cannot read file " << qPrintable(fileName)
@@ -22,7 +25,7 @@ bool runScript(const QString &fileName, const QStringList &args)
     in.setCodec("UTF-8");
     QString script = in.readAll();
     file.close();
-
+DEBUG<<script;
     QScriptEngine interpreter;
 
     PumpSpreadsheet spreadsheet;
@@ -48,6 +51,10 @@ bool runScript(const QString &fileName, const QStringList &args)
                                     qsFilterProto);
     interpreter.globalObject().setProperty("PumpFilter", qsFilterCtor);
 
+    QScriptValue qsSum =
+            interpreter.newFunction(sum);
+    interpreter.globalObject().setProperty("sum", qsSum);
+
     interpreter.evaluate(script);
     if (interpreter.hasUncaughtException()) {
         std::cerr << "Uncaught exception at line "
@@ -60,6 +67,7 @@ bool runScript(const QString &fileName, const QStringList &args)
                   << std::endl;
         return false;
     }
+    interpreter.evaluate("sum(1,2,3,4,5,6);");
 
     return true;
 }
@@ -68,6 +76,30 @@ QScriptValue pumpFilterConstructor(QScriptContext * /* context */,
                                    QScriptEngine *interpreter)
 {
     return interpreter->toScriptValue(PumpFilter());
+}
+
+QScriptValue sum(QScriptContext *  context ,
+                                   QScriptEngine *interpreter)
+{
+    QScriptValue unaryFunc;
+    int i = 0;
+    if(context->argument(0).isFunction()){
+        unaryFunc = context->argument(0);
+        i = 1;
+    }
+    double result = 0.0;
+    while(i<context->argumentCount()){
+        QScriptValue qsArg = context->argument(i);
+        if(unaryFunc.isValid()){
+            QScriptValueList qsArgList;
+            qsArgList << qsArg;
+            qsArg = unaryFunc.call(QScriptValue(),qsArgList);
+        }
+        result += qsArg.toNumber();
+        ++i;
+    }
+
+    return QScriptValue(interpreter,result);
 }
 
 PumpFilterPrototype::PumpFilterPrototype(QObject *parent)

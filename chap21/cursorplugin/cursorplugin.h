@@ -5,6 +5,8 @@
 
 class CursorPlugin : public QImageIOPlugin
 {
+	Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QImageIOFactoryInterface" FILE "cursorplugin.json")
 public:
     QStringList keys() const;
     Capabilities capabilities(QIODevice *device,

@@ -5,7 +5,9 @@
 #include <QGraphicsItem>
 #include <QPainterPath>
 
+QT_BEGIN_NAMESPACE
 class QGradient;
+QT_END_NAMESPACE
 
 class CityBlock : public QGraphicsItem
 {

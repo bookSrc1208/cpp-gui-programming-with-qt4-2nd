@@ -1,4 +1,4 @@
-#include <QtGui>
+#include <QtWidgets>
 
 #include "bronzestyleplugin.h"
 #include "../bronze/bronzestyle.h"
@@ -15,4 +15,4 @@ QStyle *BronzeStylePlugin::create(const QString &key)
     return 0;
 }
 
-Q_EXPORT_PLUGIN2(bronzestyleplugin, BronzeStylePlugin)
+//Q_EXPORT_PLUGIN2(bronzestyleplugin, BronzeStylePlugin)

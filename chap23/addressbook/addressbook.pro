@@ -1,5 +1,6 @@
 TEMPLATE      = app
-CONFIG       += qaxserver
+TARGET = addressbook
+QT           += widgets axserver
 HEADERS       = abitem.h \
                 addressbook.h \
                 editdialog.h

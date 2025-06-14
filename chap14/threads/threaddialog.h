@@ -5,7 +5,9 @@
 
 #include "thread.h"
 
+QT_BEGIN_NAMESPACE
 class QPushButton;
+QT_END_NAMESPACE
 
 class ThreadDialog : public QDialog
 {

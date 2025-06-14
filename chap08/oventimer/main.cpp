@@ -1,6 +1,6 @@
 #include <QApplication>
 
-#include "oventimer.h" // usingcpp
+#include "oventimer.h"
 
 int main(int argc, char *argv[])
 {

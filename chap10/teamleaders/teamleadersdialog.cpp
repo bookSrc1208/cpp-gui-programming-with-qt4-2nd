@@ -1,4 +1,4 @@
-//#include <QtGui>
+//#include <QtWidgets>
 #include <QStringListModel>
 #include <QListView>
 #include <QDialogButtonBox>

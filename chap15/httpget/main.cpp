@@ -1,6 +1,5 @@
 #include <QtCore>
 #include <iostream>
-
 #include "httpget.h"
 
 int main(int argc, char *argv[])
@@ -11,7 +10,7 @@ int main(int argc, char *argv[])
     if (args.count() != 2) {
         std::cerr << "Usage: httpget url" << std::endl
                   << "Example:" << std::endl
-                  << "    httpget http://doc.trolltech.com/index.html"
+                  << "    http://qt-project.org/"
                   << std::endl;
         return 1;
     }

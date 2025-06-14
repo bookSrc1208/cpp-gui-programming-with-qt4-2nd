@@ -2,9 +2,12 @@
 #define HTTPGET_H
 
 #include <QFile>
-#include <QHttp>
+#include <QNetworkAccessManager>
 
-class QUrl;
+QT_BEGIN_NAMESPACE
+class QNetworkAccessManager;
+class QNetworkReply;
+QT_END_NAMESPACE
 
 class HttpGet : public QObject
 {
@@ -13,16 +16,16 @@ class HttpGet : public QObject
 public:
     HttpGet(QObject *parent = 0);
 
+    void startRequest(const QUrl &url);
     bool getFile(const QUrl &url);
 
-signals:
-    void done();
-
 private slots:
-    void httpDone(bool error);
+    void httpFinished();
+    void httpReadyRead();
 
 private:
-    QHttp http;
+    QNetworkAccessManager qnam;
+    QNetworkReply *reply;
     QFile file;
 };
 

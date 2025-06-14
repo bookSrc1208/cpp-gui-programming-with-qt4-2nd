@@ -1,4 +1,4 @@
-#include <QtGui>
+#include <QtWidgets>
 #include <QtOpenGL>
 #include <cmath>
 
@@ -11,6 +11,8 @@
 VowelCube::VowelCube(QWidget *parent)
     : QGLWidget(parent)
 {
+    //setAutoFillBackground(false);
+    //setAutoBufferSwap(false);
     setFormat(QGLFormat(QGL::SampleBuffers));
 
     rotationX = -38.0;
@@ -86,6 +88,9 @@ void VowelCube::createGLObject()
     glNewList(glObject, GL_COMPILE);
     qglColor(QColor(255, 239, 191));
     glLineWidth(1.0);
+//    qglColor(QColor(255, 0, 0));
+//    glLineWidth(4.0);
+
 
     glBegin(GL_LINES);
     glVertex3f(+1.0, +1.0, -1.0);

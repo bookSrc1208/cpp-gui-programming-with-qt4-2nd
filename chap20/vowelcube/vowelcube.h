@@ -6,7 +6,7 @@
 #include <QOpenGLFunctions_1_1>
 #include <QRadialGradient>
 
-class VowelCube : public QGLWidget,public  QOpenGLFunctions_1_1
+class VowelCube : public QGLWidget//,public  QOpenGLFunctions_1_1
 {
     Q_OBJECT
 

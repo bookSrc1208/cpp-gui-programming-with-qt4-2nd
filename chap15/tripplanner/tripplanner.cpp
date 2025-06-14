@@ -1,3 +1,5 @@
+//#include <QtWidgets>
+#include <QtNetwork>
 
 #include <QPushButton>
 #include <QHostAddress>
@@ -155,5 +157,5 @@ void TripPlanner::closeConnection()
     tcpSocket.close();
     searchButton->setEnabled(true);
     stopButton->setEnabled(false);
-    //progressBar->hide();
+    progressBar->hide();
 }

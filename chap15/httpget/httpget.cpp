@@ -1,13 +1,22 @@
 #include <QtCore>
 #include <QtNetwork>
 #include <iostream>
-
+#include <QUrl>
 #include "httpget.h"
 
 HttpGet::HttpGet(QObject *parent)
     : QObject(parent)
 {
-    connect(&http, SIGNAL(done(bool)), this, SLOT(httpDone(bool)));
+
+}
+
+void HttpGet::startRequest(const QUrl &url)
+{
+    reply = qnam.get(QNetworkRequest(url));
+    connect(reply, SIGNAL(finished()),
+            this, SLOT(httpFinished()));
+    connect(reply, SIGNAL(readyRead()),
+            this, SLOT(httpReadyRead()));
 }
 
 bool HttpGet::getFile(const QUrl &url)
@@ -29,7 +38,7 @@ bool HttpGet::getFile(const QUrl &url)
 
     QString localFileName = QFileInfo(url.path()).fileName();
     if (localFileName.isEmpty())
-        localFileName = "httpget.out";
+        localFileName = "httpget.html";
 
     file.setFileName(localFileName);
     if (!file.open(QIODevice::WriteOnly)) {
@@ -39,21 +48,28 @@ bool HttpGet::getFile(const QUrl &url)
         return false;
     }
 
-    http.setHost(url.host(), url.port(80));
-    http.get(url.path(), &file);
-    http.close();
+    startRequest(url);
+
     return true;
 }
 
-void HttpGet::httpDone(bool error)
+void HttpGet::httpFinished()
 {
-    if (error) {
-        std::cerr << "Error: " << qPrintable(http.errorString())
-                  << std::endl;
-    } else {
-        std::cerr << "File downloaded as "
-                  << qPrintable(file.fileName()) << std::endl;
-    }
+    file.flush();
     file.close();
-    emit done();
+
+    QVariant redirectionTarget = reply->attribute(QNetworkRequest::RedirectionTargetAttribute);
+    if (reply->error()) {
+        file.remove();
+        std::cerr << "Download failed: " << std::endl;
+    }
+
+    reply->deleteLater();
+    reply = 0;
+    qApp->quit();
+}
+
+void HttpGet::httpReadyRead()
+{
+    file.write(reply->readAll());
 }

@@ -3,6 +3,7 @@
 
 #include <QWidget>
 
+QT_BEGIN_NAMESPACE
 class QDialogButtonBox;
 class QLabel;
 class QModelIndex;
@@ -10,6 +11,7 @@ class QPushButton;
 class QSplitter;
 class QSqlRelationalTableModel;
 class QTableView;
+QT_END_NAMESPACE
 
 enum {
     Department_Id = 0,

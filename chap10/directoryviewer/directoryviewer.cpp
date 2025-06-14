@@ -25,7 +25,7 @@ DirectoryViewer::DirectoryViewer(QWidget *parent)
     treeView->header()->setStretchLastSection(true);
     treeView->header()->setSortIndicator(0, Qt::AscendingOrder);
     treeView->header()->setSortIndicatorShown(true);
-    treeView->header()->setSectionsClickable(true);
+    treeView->header()->setSectionsClickable(true); //setClickable(true);
 
     QModelIndex index = model->index(QDir::currentPath());
     treeView->expand(index);

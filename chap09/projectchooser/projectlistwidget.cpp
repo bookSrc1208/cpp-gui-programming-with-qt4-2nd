@@ -1,4 +1,4 @@
-#include <QtGui>
+#include <QtWidgets>
 #include <QApplication>
 #include "projectlistwidget.h"
 

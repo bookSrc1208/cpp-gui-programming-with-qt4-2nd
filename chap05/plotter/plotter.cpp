@@ -1,4 +1,4 @@
-//#include <QtGui>
+//#include <QtWidgets>
 #include <QToolButton>
 #include <QPen>
 #include <QStylePainter>
@@ -22,12 +22,12 @@ Plotter::Plotter(QWidget *parent)
     rubberBandIsShown = false;
 
     zoomInButton = new QToolButton(this);
-    zoomInButton->setIcon(QIcon(":/images/zoomin.png"));//鏀惧ぇ/鍓嶈繘
+    zoomInButton->setIcon(QIcon(":/images/zoomin.png"));//放大/前进
     zoomInButton->adjustSize();
     connect(zoomInButton, SIGNAL(clicked()), this, SLOT(zoomIn()));
 
     zoomOutButton = new QToolButton(this);
-    zoomOutButton->setIcon(QIcon(":/images/zoomout.png"));//缂╁皬/鍚庨��
+    zoomOutButton->setIcon(QIcon(":/images/zoomout.png"));//缩小/后退
     zoomOutButton->adjustSize();
     connect(zoomOutButton, SIGNAL(clicked()), this, SLOT(zoomOut()));
 

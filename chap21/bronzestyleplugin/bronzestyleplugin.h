@@ -3,8 +3,15 @@
 
 #include <QStylePlugin>
 
+QT_BEGIN_NAMESPACE
+class QStringList;
+class QStyle;
+QT_END_NAMESPACE
+
 class BronzeStylePlugin : public QStylePlugin
 {
+	Q_OBJECT
+	Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QStyleFactoryInterface" FILE "bronzestyle.json")
 public:
     QStringList keys() const;
     QStyle *create(const QString &key);

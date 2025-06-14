@@ -16,7 +16,7 @@ void populateTree(QTreeWidget *treeWidget)
     treeWidget->show();
 
     (void) new QTreeWidgetItem(treeWidget,
-            QStringList() << "sidebearings" << "10<, 34-35, 307-308");
+            QStringList() << "sidebearings" << "10, 34-35, 307-308");
     QTreeWidgetItem *subterm = new QTreeWidgetItem(treeWidget,
             QStringList() << "subtraction");
     (void) new QTreeWidgetItem(subterm,

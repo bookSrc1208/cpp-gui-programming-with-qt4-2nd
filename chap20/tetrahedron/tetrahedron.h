@@ -5,7 +5,7 @@
 //#include <QOpenGLWindow>
 #include <QOpenGLFunctions_1_1>
 
-class Tetrahedron : public QGLWidget,public QOpenGLFunctions_1_1
+class Tetrahedron : public QGLWidget//,public QOpenGLFunctions_1_1
 {
     Q_OBJECT
 

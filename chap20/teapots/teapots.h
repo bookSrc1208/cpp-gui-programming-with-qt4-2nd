@@ -1,8 +1,7 @@
 #ifndef TEAPOTS_H
 #define TEAPOTS_H
 
-#include <QGLFramebufferObject>
-#include <QGLWidget>
+#include <QtOpenGL>
 
 class Teapots : public QGLWidget
 {

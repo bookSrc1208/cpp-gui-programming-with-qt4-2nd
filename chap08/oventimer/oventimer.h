@@ -4,7 +4,9 @@
 #include <QDateTime>
 #include <QWidget>
 
+QT_BEGIN_NAMESPACE
 class QTimer;
+QT_END_NAMESPACE
 
 class OvenTimer : public QWidget
 {

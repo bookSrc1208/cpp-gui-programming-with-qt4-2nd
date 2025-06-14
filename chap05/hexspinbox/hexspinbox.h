@@ -3,7 +3,9 @@
 
 #include <QSpinBox>
 
+QT_BEGIN_NAMESPACE
 class QRegExpValidator;
+QT_END_NAMESPACE
 
 class HexSpinBox : public QSpinBox
 {

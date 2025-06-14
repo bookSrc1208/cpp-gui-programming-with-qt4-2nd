@@ -1,5 +1,5 @@
 TEMPLATE      = app
-QT           +=  gui core network widgets
+QT           += network widgets
 HEADERS       = tripplanner.h
 SOURCES       = main.cpp \
                 tripplanner.cpp

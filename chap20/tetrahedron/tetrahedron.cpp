@@ -1,5 +1,7 @@
-#include <QtGui>
+#include <QtWidgets>
 #include <QtOpenGL>
+
+//#include <GL/glu.h>
 
 #include "tetrahedron.h"
 
@@ -20,6 +22,8 @@ Tetrahedron::Tetrahedron(QWidget *parent)
 void Tetrahedron::initializeGL()
 {
     qglClearColor(Qt::black);
+    //glClearColor(50,50,50,255);//功能同上
+
     glShadeModel(GL_FLAT);
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
@@ -123,6 +127,7 @@ int Tetrahedron::faceAtPosition(const QPoint &pos)
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
     glLoadIdentity();
+
     gluPickMatrix(GLdouble(pos.x()), GLdouble(viewport[3] - pos.y()),
                   5.0, 5.0, viewport);
     GLfloat x = GLfloat(width()) / height();

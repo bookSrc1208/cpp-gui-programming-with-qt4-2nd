@@ -1,8 +1,9 @@
-#include <QtGui>
+#include <QtWidgets>
+#include <QDebug>
 
 #include "application.h"
 #include "tictactoe.h"
-
+#define DEBUG qDebug()<<__LINE__
 Application::Application(int &argc, char *argv[])
     : QApplication(argc, argv)
 {
@@ -17,7 +18,7 @@ void Application::setTicTacToe(TicTacToe *toe)
 void Application::saveState(QSessionManager &sessionManager)
 {
     QString fileName = ticTacToe->saveState();
-
+DEBUG<<fileName;
     QStringList discardCommand;
     discardCommand << "rm" << fileName;
     sessionManager.setDiscardCommand(discardCommand);

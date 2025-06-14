@@ -5,7 +5,9 @@
 #include <QObject>
 #include <QFtp>// 这个类已经被淘汰了
 
+QT_BEGIN_NAMESPACE
 class QUrl;
+QT_END_NAMESPACE
 
 class FtpGet : public QObject
 {

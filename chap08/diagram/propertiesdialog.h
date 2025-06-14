@@ -3,7 +3,9 @@
 
 #include "ui_propertiesdialog.h"
 
+QT_BEGIN_NAMESPACE
 class Node;
+QT_END_NAMESPACE
 
 class PropertiesDialog : public QDialog, private Ui::PropertiesDialog
 {

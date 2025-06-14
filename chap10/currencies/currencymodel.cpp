@@ -9,11 +9,9 @@ CurrencyModel::CurrencyModel(QObject *parent)
 
 void CurrencyModel::setCurrencyMap(const QMap<QString, double> &map)
 {
-    currencyMap = map;
-    //reset();
-//    beginResetModel();
-//    this->resetInternalData();
-//    this->endResetModel();
+	beginResetModel();
+	currencyMap = map;
+    endResetModel();
 }
 
 int CurrencyModel::rowCount(const QModelIndex & /* parent */) const

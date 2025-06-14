@@ -1,5 +1,7 @@
 TEMPLATE      = lib
-CONFIG       += dll qaxserver
+TARGET = bouncer
+QT += widgets axserver
+CONFIG       += dll
 HEADERS       = axbouncer.h \
                 objectsafetyimpl.h
 SOURCES       = axbouncer.cpp \

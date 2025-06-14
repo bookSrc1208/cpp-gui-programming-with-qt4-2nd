@@ -1,5 +1,5 @@
 TEMPLATE      = app
-QT            = core network
+QT            = core network widgets ftp
 CONFIG       += console
 CONFIG       -= app_bundle
 HEADERS       = spider.h
